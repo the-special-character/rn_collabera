@@ -4,6 +4,7 @@ import Input from '../../components/Input';
 import MessageIcon from '../../../assets/icons/Message.svg';
 import SearchIcon from '../../../assets/icons/search.svg';
 import styles from './styles';
+import Button from '../../components/Button';
 
 const Login = () => {
   return (
@@ -13,6 +14,7 @@ const Login = () => {
         <Input suffixIcon={MessageIcon} variant="success" />
         <Input suffixIcon={SearchIcon} variant="warning" />
         <Input variant="error" />
+        <Button btnIcon={MessageIcon} />
       </View>
     </SafeAreaView>
   );

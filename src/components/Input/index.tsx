@@ -18,7 +18,14 @@ const Input = ({variant, suffixIcon: SuffixIcon, ...props}: Props) => {
 
   return (
     <View style={styles.inputWrapper}>
-      {SuffixIcon && <SuffixIcon height={24} width={24} style={styles.svg} />}
+      {SuffixIcon && (
+        <SuffixIcon
+          height={24}
+          width={24}
+          stroke="#3E5481"
+          style={styles.svg}
+        />
+      )}
       <TextInput style={inputStyle} {...props} />
     </View>
   );
