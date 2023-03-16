@@ -27,12 +27,14 @@ const styles = StyleSheet.create({
 });
 
 const App = () => {
+  console.log('Hello world');
+
   return (
     // Instead of div you have to use View
     // You have to write every text in Text Component
     <SafeAreaView style={styles.wrapper}>
       {[...Array(5).keys()].map(x => (
-        <View style={[styles.boxSize, styles.boxColor]}>
+        <View key={x} style={[styles.boxSize, styles.boxColor]}>
           <Text style={styles.text}>Item {x + 1}</Text>
         </View>
       ))}
