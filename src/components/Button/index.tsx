@@ -1,4 +1,4 @@
-import {Text, Pressable} from 'react-native';
+import {Text, Pressable, PressableProps} from 'react-native';
 import React from 'react';
 import styles, {colors} from './styles';
 import {SvgProps} from 'react-native-svg';
@@ -8,7 +8,7 @@ type Props = {
   variant?: 'primary' | 'secondary' | 'form';
   type?: 'fill' | 'outline';
   size?: 'small' | 'default' | 'large';
-};
+} & PressableProps;
 
 const Button = ({
   variant = 'primary',
