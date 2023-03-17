@@ -5,21 +5,21 @@ import styles from './styles';
 
 type Props = {
   variant?: 'success' | 'warning' | 'error';
-  suffixIcon?: React.FC<SvgProps>;
+  prefixIcon?: React.FC<SvgProps>;
 } & TextInputProps;
 
-const Input = ({variant, suffixIcon: SuffixIcon, ...props}: Props) => {
+const Input = ({variant, prefixIcon: PrefixIcon, ...props}: Props) => {
   const inputStyle = [styles.input];
   if (variant) {
     inputStyle.push(styles[variant]);
   }
 
-  console.log(SuffixIcon);
+  console.log(PrefixIcon);
 
   return (
     <View style={styles.inputWrapper}>
-      {SuffixIcon && (
-        <SuffixIcon
+      {PrefixIcon && (
+        <PrefixIcon
           height={24}
           width={24}
           stroke="#3E5481"
