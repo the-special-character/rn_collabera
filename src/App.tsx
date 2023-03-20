@@ -1,10 +1,36 @@
 import React from 'react';
 import Login from './screen/Login';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
+import Register from './screen/Register';
+
+const MyTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#F5BD0A',
+    background: '#fff',
+    text: '#2E3E5C',
+  },
+};
+
+const Stack = createNativeStackNavigator();
 
 const App = () => {
-  console.log('Hello world');
-
-  return <Login />;
+  return (
+    <NavigationContainer theme={MyTheme}>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen name="Register" component={Register} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 
   // return (
   //   // Instead of div you have to use View

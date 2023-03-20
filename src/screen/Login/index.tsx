@@ -8,7 +8,7 @@ import GoogleIcon from '../../../assets/icons/Google.svg';
 import styles from './styles';
 import Button from '../../components/Button';
 
-const Login = () => {
+const Login = ({navigation}) => {
   const passwordRef = useRef();
 
   return (
@@ -67,7 +67,11 @@ const Login = () => {
                 <Button btnIcon={GoogleIcon} type="outline" />
                 <Text style={[styles.body, {color: '#2E3E5C'}]}>
                   Don't have any account?{' '}
-                  <Text style={{color: '#1FCC79', fontWeight: '700'}}>
+                  <Text
+                    style={{color: '#1FCC79', fontWeight: '700'}}
+                    onPress={() => {
+                      navigation.push('Register');
+                    }}>
                     Sign Up
                   </Text>
                 </Text>
