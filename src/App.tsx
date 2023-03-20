@@ -3,6 +3,12 @@ import Login from './screen/Login';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import Register from './screen/Register';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import HomeScreen from './screen/HomeScreen';
+import UploadScreen from './screen/UploadScreen';
+import ScanScreen from './screen/ScanScreen';
+import NotificationScreen from './screen/NotificationScreen';
+import ProfileScreen from './screen/ProfileScreen';
 
 const MyTheme = {
   ...DefaultTheme,
@@ -14,21 +20,48 @@ const MyTheme = {
   },
 };
 
-const Stack = createNativeStackNavigator();
+const RootStack = createNativeStackNavigator();
+const MainTab = createBottomTabNavigator();
+
+const AuthStack = createNativeStackNavigator();
+
+const AuthScreens = () => {
+  return (
+    <AuthStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <AuthStack.Screen name="Login" component={Login} />
+      <AuthStack.Screen name="Register" component={Register} />
+    </AuthStack.Navigator>
+  );
+};
+
+const MainScreens = () => {
+  return (
+    <MainTab.Navigator>
+      <MainTab.Screen name="Home" component={HomeScreen} />
+      <MainTab.Screen name="Upload" component={UploadScreen} />
+      <MainTab.Screen name="Scan" component={ScanScreen} />
+      <MainTab.Screen name="Notification" component={NotificationScreen} />
+      <MainTab.Screen name="Profile" component={ProfileScreen} />
+    </MainTab.Navigator>
+  );
+};
 
 const App = () => {
   return (
     <NavigationContainer theme={MyTheme}>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Login"
-          component={Login}
+      <RootStack.Navigator>
+        <RootStack.Screen
+          name="auth"
+          component={AuthScreens}
           options={{
             headerShown: false,
           }}
         />
-        <Stack.Screen name="Register" component={Register} />
-      </Stack.Navigator>
+        <RootStack.Screen name="main" component={MainScreens} />
+      </RootStack.Navigator>
     </NavigationContainer>
   );
 

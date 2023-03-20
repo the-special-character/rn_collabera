@@ -17,8 +17,13 @@ const Input = ({
   ...props
 }: Props) => {
   const inputStyle = [styles.input];
+  const error = touched[name] && errors[name];
   if (variant) {
     inputStyle.push(styles[variant]);
+  }
+
+  if (error) {
+    inputStyle.push(styles['error']);
   }
 
   console.log(PrefixIcon);
@@ -44,7 +49,7 @@ const Input = ({
           {...props}
         />
       </View>
-      {touched[name] && errors[name] && <Text>{errors[name]}</Text>}
+      <Text style={styles.errorMsg}>{error}</Text>
     </View>
   );
 };
