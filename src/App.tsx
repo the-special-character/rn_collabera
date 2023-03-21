@@ -29,6 +29,7 @@ const MyTheme = {
 };
 
 const RootStack = createNativeStackNavigator();
+const HomeStack = createNativeStackNavigator();
 const MainTab = createBottomTabNavigator();
 
 const AuthStack = createNativeStackNavigator();
@@ -42,6 +43,17 @@ const AuthScreens = () => {
       <AuthStack.Screen name="Login" component={Login} />
       <AuthStack.Screen name="Register" component={Register} />
     </AuthStack.Navigator>
+  );
+};
+
+const HomeStackScreen = () => {
+  return (
+    <HomeStack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
+    </HomeStack.Navigator>
   );
 };
 
@@ -78,7 +90,7 @@ const MainScreens = () => {
           height: 95,
         },
       })}>
-      <MainTab.Screen name="Home" component={HomeScreen} />
+      <MainTab.Screen name="Home" component={HomeStackScreen} />
       <MainTab.Screen name="Upload" component={UploadScreen} />
       <MainTab.Screen
         name="Scan"
