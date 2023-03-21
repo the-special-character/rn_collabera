@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
 const axiosInstance = axios.create({
@@ -7,8 +8,12 @@ const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(
-  function (config) {
+  async function (config) {
     // Do something before request is sent
+    const res = await AsyncStorage.getItem('@token');
+    if (res) {
+    }
+
     return config;
   },
   function (error) {
