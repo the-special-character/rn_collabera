@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import React, {useRef} from 'react';
 import {Formik, Field} from 'formik';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Input from '../../components/Input';
 import CheckMarkIcon from '../../../assets/icons/checkMark.svg';
 import SelectedCheckMarkIcon from '../../../assets/icons/SelectedCheckMark.svg';
@@ -14,6 +15,7 @@ import MessageIcon from '../../../assets/icons/Message.svg';
 import LockIcon from '../../../assets/icons/Lock.svg';
 import styles from '../Login/styles';
 import Button from '../../components/Button';
+import axiosInstance from '../../utils/axiosInstance';
 
 const Register = ({navigation}) => {
   // const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
@@ -43,9 +45,15 @@ const Register = ({navigation}) => {
           email: '',
           password: '',
         }}
-        onSubmit={(values, actions) => {
-          console.log(values);
-          actions.resetForm();
+        onSubmit={async (values, actions) => {
+          try {
+            const res = await axiosInstance.post('register', values);
+            await AsyncStorage.setItem('@token', JSON.stringify(res.data));
+            navigation.push('main');
+            actions.resetForm();
+          } catch (error) {
+            console.log(error);
+          }
         }}>
         {({handleSubmit, values}) => (
           <SafeAreaView style={[styles.seprator]}>

@@ -52,14 +52,11 @@ const MainScreens = () => {
 const App = () => {
   return (
     <NavigationContainer theme={MyTheme}>
-      <RootStack.Navigator>
-        <RootStack.Screen
-          name="auth"
-          component={AuthScreens}
-          options={{
-            headerShown: false,
-          }}
-        />
+      <RootStack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}>
+        <RootStack.Screen name="auth" component={AuthScreens} />
         <RootStack.Screen name="main" component={MainScreens} />
       </RootStack.Navigator>
     </NavigationContainer>

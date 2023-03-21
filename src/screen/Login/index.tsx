@@ -13,6 +13,8 @@ import LockIcon from '../../../assets/icons/Lock.svg';
 import GoogleIcon from '../../../assets/icons/Google.svg';
 import styles from './styles';
 import Button from '../../components/Button';
+import axiosInstance from '../../utils/axiosInstance';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ({navigation}) => {
   // const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
@@ -42,17 +44,37 @@ const Login = ({navigation}) => {
           email: '',
           password: '',
         }}
-        onSubmit={(values, actions) => {
-          console.log(values);
-          actions.resetForm();
+        onSubmit={async (values, actions) => {
+          try {
+            const res = await axiosInstance.post('login', values);
+            await AsyncStorage.setItem('@token', JSON.stringify(res.data));
+            navigation.push('main');
+            actions.resetForm();
+          } catch (error) {
+            actions.setErrors({
+              serverError: error.message,
+            });
+          }
         }}>
-        {({handleSubmit}) => (
+        {({handleSubmit, errors}) => (
           <SafeAreaView style={[styles.seprator]}>
             <View style={styles.headerWrapper}>
               <Text style={styles.title}>Welcome Back!</Text>
               <Text style={styles.body}>Please Enter your account here</Text>
             </View>
             <View style={styles.inputWrapper}>
+              {errors.serverError && (
+                <Text
+                  style={{
+                    textAlign: 'center',
+                    marginBottom: 24,
+                    fontSize: 16,
+                    fontWeight: 'bold',
+                    color: 'red',
+                  }}>
+                  {errors.serverError}
+                </Text>
+              )}
               <Field
                 name="email"
                 component={Input}
